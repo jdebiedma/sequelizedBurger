@@ -1,0 +1,76 @@
+<h1 style="font-family: 'Faster One';font-size: 122px;">Burger Time!</h1>
+
+<img id="burgerPic" src="https://media1.giphy.com/media/l3mDrqQeUk6fC/giphy.gif">
+
+<div id = "burgerList" class="row">
+	<div class="col-md-6">
+		<div id = "burgerPanel" class="panel">
+		<h2 >Burgers to Eat:</h2>
+			
+			<ul>
+			  {{#each burgers}}
+			    {{#unless this.devoured}}
+			      <li>
+			        {{this.burger_name}}
+
+			        <form action="/{{this.id}}?_method=PUT" method="POST">
+			          <input type="hidden" name="devoured" value="true">
+			          <button class="btn-success" type="submit">Eat This Burger!</button>
+			        </form>
+			      </li>
+			    {{/unless}}
+			  {{/each}}
+			</ul>
+		</div>	
+	</div>
+	<div class="col-md-6">
+		<div id="eatenPanel" class="panel">
+		<h2>Devoured Burgers:</h2>
+
+				<ul>
+				  {{#each burgers}}
+				    {{#if this.devoured}}
+				      <li>
+				        {{this.burger_name}}
+
+				        <form action="/{{this.id}}?_method=PUT" method="POST">
+				          <input type="hidden" name="devoured" value="false">
+				          <button class="btn-danger" type="submit">Regurgitate!</button>
+				        </form>
+				      </li>
+				    {{/if}}
+				  {{/each}}
+				</ul>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-4">
+	</div>
+
+	<div class="col-sm-4">
+	<div id = "createPanel" class = "panel">
+		<h2 style="text-align:center">Create Burger:</h2>
+		<form class="create-update-form" action="/" method="POST">
+
+		  <div style="margin-left:25%"class="form-group">
+		    <label for="burg">Burger Name:</label>
+		      <br>
+		    <input style="width:70%"type="text" id="ca" name="burger_name">
+		  </div>
+
+
+	{{!-- 	  <div style="margin-left:35%" class="form-group">
+		    <label for="ea">Eaten?</label><br>
+		    <input type="radio" name="devoured" value="0" checked> Not Eaten<br>
+		    <input type="radio" name="devoured" value="1"> Devoured
+		  </div> --}}
+
+		  <button class="btn-info" style="margin-left:35%" type="submit">Submit Burger</button>
+		</form>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+	</div>
